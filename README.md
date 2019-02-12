@@ -20,7 +20,7 @@ chown www-data /var/log/takeup
 <virtualhost *:80>
     DocumentRoot /var/www/html/hashdb/
     ServerName hashdb.okerr.com
-    ProxyPass / unix:/var/run/takeup/takeup.sock|uwsgi://zzz/
+    ProxyPass /submit unix:/var/run/takeup/takeup.sock|uwsgi://zzz/
 </virtualhost>
 ~~~
 
