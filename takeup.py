@@ -10,13 +10,12 @@ from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-application = app
 
-@app.route("/")
+@app.route("/",methods=['GET'])
 def index():
     return "TakeUp server"
 
-@app.route('/submit', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def submit():
     global count
     # check if the post request has the file part
@@ -28,7 +27,8 @@ def submit():
 
     # print(request.form["aaa"])
 
-    upname = '{}.{}'.format(started, count)
+    upname = 'u{}.p{}.c{}'.format(started, os.getpid(), count)
+    log.info("process {}".format(upname))
     count += 1
 
     uptmpdir = os.path.join(tmpdir, upname)
@@ -61,7 +61,7 @@ def submit():
 
     os.rename(uptmpdir, upnewdir)
     log.info("accepted {} from {}".format(upnewdir, request.remote_addr))
-    return "OK {}".format(upnewdir)
+    return "OK"
 
 #def application(env, start_response):
 #    start_response('200 OK', [('Content-Type','text/html')])
@@ -77,19 +77,19 @@ def startup():
     updir = os.getenv("UPDIR",'/tmp')
     logfile = os.getenv("LOGFILE",'/tmp/takeup.log')
 
-    print("up dir: {}".format(os.getenv('UPDIR')))
-    print("logfile : {}".format(os.getenv('LOGFILE')))
+    print("up dir: {}".format(updir))
+    print("logfile : {}".format(logfile))
 
     log = logging.getLogger()
     log.setLevel(logging.INFO)
-    fh = logging.FileHandler(os.getenv("LOGFILE"))
+    fh = logging.FileHandler(logfile)
     formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     fh.setFormatter(formatter)
     log.addHandler(fh)
     log.info("TakeUp started")
 
-    tmpdir = os.path.join(os.getenv("UPDIR"), "tmp")
-    newdir = os.path.join(os.getenv("UPDIR"), "new")
+    tmpdir = os.path.join(updir, "tmp")
+    newdir = os.path.join(updir, "new")
     started = int(time.time())
     count = 0
 
