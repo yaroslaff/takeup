@@ -1,3 +1,7 @@
+#
+# edit and copy to /etc/systemd/system/takeup.service
+#
+
 [Unit]
 Description=UWSGI instance to serve TakeUp
 After=network.target
