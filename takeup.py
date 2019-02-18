@@ -88,14 +88,16 @@ def startup():
     log.addHandler(fh)
     log.info("TakeUp started")
 
+    print("uid: {}".format(os.getuid()))
+
     tmpdir = os.path.join(updir, "tmp")
     newdir = os.path.join(updir, "new")
     started = int(time.time())
     count = 0
 
 
-    if not os.path.exists(os.getenv("UPDIR")):
-        os.mkdir(os.getenv("UPDIR"))
+    if not os.path.exists(updir):
+        os.mkdir(updir)
 
     if not os.path.exists(tmpdir):
         os.mkdir(tmpdir)
