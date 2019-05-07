@@ -21,7 +21,7 @@ chown www-data /var/log/takeup
 
 ~~~
 apt install libapache2-mod-proxy-uwsgi
-apt install uwsgi-plugin-python
+apt install uwsgi-plugin-python3
 a2enmod proxy_uwsgi
 ~~~
 
