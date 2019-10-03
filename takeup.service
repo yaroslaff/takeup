@@ -9,7 +9,8 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/home/xenon/repo/takeup
+# WorkingDirectory=/home/xenon/repo/takeup
+WorkingDirectory=/var/run/takeup
 ExecStart=/usr/bin/uwsgi /home/xenon/repo/takeup/uwsgi.ini
 RuntimeDirectory=takeup
 RuntimeDirectoryMode=0755

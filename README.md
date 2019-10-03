@@ -21,6 +21,8 @@ a2enmod proxy_uwsgi
 ~~~
 
 ### Install systemd service
+edit uwsgi.ini and ajdust chdir= to path to this takeup directory (where README and takeup.py )
+edit takeup.service and adjust ExecStart= to your path to uwsgi.ini
 ~~~
 cp takeup.service /etc/systemd/system/
 ~~~
