@@ -8,12 +8,7 @@ Take any HTTP form uploads and save on disk.
 ~~~
 pip install -r requirements.txt
 
-mkdir /var/run/takeup
-mkdir /var/run/takeup/uploads
 mkdir /var/log/takeup
-
-chown www-data /var/run/takeup
-chown www-data /var/run/takeup/uploads
 chown www-data /var/log/takeup
 ~~~
 
@@ -23,6 +18,11 @@ chown www-data /var/log/takeup
 apt install libapache2-mod-proxy-uwsgi
 apt install uwsgi-plugin-python3
 a2enmod proxy_uwsgi
+~~~
+
+### Install systemd service
+~~~
+cp takeup.service /etc/systemd/system/
 ~~~
 
 ### Example apache config
